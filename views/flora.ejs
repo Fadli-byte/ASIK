@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fauna Taman Nasional Ujung Kulon</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/public/fauna.css">
+</head>
+<body>
+    <header id="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <img src="/public/images/bg_fik.png" alt="Logo Ekosistem Pesisir" class="logo" style="margin-left: -150px;">
+<h1 style="display: inline-block; margin-left: 1px;">KonservasiUjungKulon</h1>
+            </a>
+            <nav>
+                <ul class="menu">
+                    <li class="menu-item"><a href="/utama"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li class="menu-item">
+                        <a href="#"><i class="fas fa-graduation-cap"></i> Edukasi</a>
+                        <ul class="dropdown">
+                            <li><a href="/flora"><i class="fas fa-seedling"></i> Flora</a></li>
+                            <li><a href="/fauna"><i class="fas fa-fish"></i> Fauna</a></li>
+                            <li><a href="/sejarah"><i class="fas fa-water"></i> Sejarah</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#"><i class="fas fa-shield-alt"></i> Konservasi</a>
+                        <ul class="dropdown">
+                            <li><a href="/karang"><i class="fas fa-water"></i> Karang&Lamun</a></li>
+                            <li><a href="/lamun"><i class="fas fa-leaf"></i> Mangrove </a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="/login"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+        <script>
+             window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'transparent';
+            } else {
+                header.style.background = 'linear-gradient(-45deg, #1a4b6e, #2980b9, #16a085, #2980b9)';
+            }
+        });
+        </script>
+    </header>
+</body>
+</html>
+    <main>
+        <section class="hero" style="background-image: url('/public/images/mangrove.png'); background-size: cover; background-position: center;">
+            <div class="hero-content">
+                <h1>Cari Tahu Flora Taman Nasional Ujung Kulon Lebih Lanjut</h1>
+                <p>Temukan keragaman Flora dan pelajari perannya dalam menjaga lingkungan</p>
+            </div>
+        </section>
+        <script>
+            const cards = document.querySelectorAll('.fauna-card');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
+                    } else {
+                        entry.target.classList.remove('animate');
+                    }
+                });
+            }, { rootMargin: '0px 0px -200px 0px' });
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        </script>
+       </head>
+       <body>
+       <main>
+           <div class="slider-container">
+               <button class="nav-button prev-button">❮</button>
+               <button class="nav-button next-button">❯</button>
+               <div class="fauna-grid">
+                   <div class="fauna-card">
+                       <img src="/public/images/mangrove avicennia.jpg" alt="Mangrove">
+                       <div class="card-content">
+                           <h3>Mangrove Avicenia</h3>
+                           <p>Avicennia: Umumnya dikenal sebagai api-api, jenis ini memiliki akar napas (pneumatofor) yang muncul dari tanah untuk mendapatkan oksigen. Avicennia banyak ditemukan di tepi pantai dan tahan terhadap salinitas tinggi.
+                            #lindungihutan.com 
+                           </p>
+                       </div>
+                   </div>
+                   <div class="fauna-card">
+                    <img src="/public/images/mangrove bruguiera.jpg" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Mangrove bruguiera</h3>
+                        <p>*Bruguiera*: Dikenal sebagai tanjang atau lindur, memiliki akar lutut yang menonjol ke atas, membantu stabilitas di tanah yang berair.
+                           #tropical.theferns.info
+                        </p>
+                    </div>
+                </div>
+                <div class="fauna-card">
+                    <img src="/public/images/mangrove rhiizopora.jpg" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Mangrove Rhiizopora</h3>
+                        <p>*Rhizophora*: Dikenal sebagai bakau, memiliki akar tunjang yang menopang pohon dari dasar tanah atau lumpur, sangat efektif melawan erosi.
+                            #blogger.com
+                        </p>
+                    </div>
+                </div>
+                <div class="fauna-card">
+                    <img src="/public/images/mangrove sonneratia.jpg" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Mangrove Sonneratia</h3>
+                        <p>*Sonneratia*: Mangrove yang disebut pedada, memiliki akar napas tebal dan menghasilkan buah yang bisa mengapung di air.
+                           #inaturalist.org
+                        </p>
+                    </div>
+                </div>
+                <div class="fauna-card">
+                    <img src="/public/images/mangrove ceriops.jpg" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Mangrove Ceriops</h3>
+                        <p>*Ceriops*: Mangrove tengar atau teruntum, tumbuh di perairan payau dengan akar mirip lutut yang mencuat dari permukaan tanah.
+                            #surabaya.tribunnews.com 
+                        </p>
+                    </div>
+                </div>
+                <div class="fauna-card">
+                    <img src="/public/images/lamun cymodocea serrulata.png" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Lamun Cymodocea Serrulata</h3>
+                        <p>*Cymodocea serrulata*: Lamun berdaun lebar dengan tepi bergerigi, tumbuh di perairan dangkal dan berfungsi menjaga kestabilan sedimen.
+                            #lcdi.indonesia.id
+                        </p>
+                    </div>
+                </div>
+                <div class="fauna-card">
+                    <img src="/public/images/lamun enhalus acoroides.jpg" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Lamun Enhalus Acoroides</h3>
+                        <p>*Enhalus acoroides*: Lamun berdaun lebar dan panjang, dikenal sebagai lamun pita. Penting untuk menjaga keanekaragaman hayati laut.
+                            #kompasiana.com
+                        </p>
+                    </div>
+                </div>
+                <div class="fauna-card">
+                    <img src="/public/images/lamun thalassia hemprichi.jpeg.jpg" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Lamun Halophila Hemprichi</h3>
+                        <p>*Halophila hemprichii*: Lamun dengan daun kecil dan tipis, tumbuh di dasar laut dangkal, berfungsi sebagai habitat bagi biota laut.
+                            #Kompasiana.com
+                        </p>
+                    </div>
+                </div>
+                <div class="fauna-card">
+                    <img src="/public/images/lamun cymodocea rotundata.jpg" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Lamun Cymodocea Rotundata</h3>
+                        <p>*Cymodocea rotundata*: Lamun dengan daun berbentuk bulat di ujungnya, biasa tumbuh di dasar laut yang berpasir.
+                            #lcdi.indonesia.id
+                        </p>
+                    </div>
+                </div>
+                <div class="fauna-card">
+                    <img src="/public/images/Lamun halodule pinifolia.jpg" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Lamun Halodule Pinifolia`</h3>
+                        <p>*Halodule*: Lamun dengan daun sempit dan panjang, tumbuh di perairan tenang dan membantu mencegah erosi dasar laut.
+                            #suaramerdeka.com 
+                        </p>
+                    </div>
+                </div>
+                <div class="fauna-card">
+                    <img src="/public/images/terumbu karang Acropora robusta.jpg" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Acropora Robusta</h3>
+                        <p>*Acropora robusta*: Karang bercabang dengan struktur kokoh, berfungsi sebagai habitat bagi banyak spesies ikan.
+
+                        </p>
+                    </div>
+                </div>
+                <div class="fauna-card">
+                    <img src="/public/images/terumbu karang Acropora valenciennesi.jpg" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Acropora valenciennesi</h3>
+                        <p>*Acropora valenciennesi*: Karang berbentuk bercabang halus, biasanya tumbuh di perairan dangkal dan berarus.
+                            #tkarang.blogspot.com
+                        </p>
+                    </div>
+                </div>
+                <div class="fauna-card">
+                    <img src="/public/images/terumbu karang arcapora.jfif.jpg" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Terumbu Karang Acropora</h3>
+                        <p>*Acropora*: Jenis karang bercabang yang cepat tumbuh, menyediakan habitat penting bagi biota laut.
+                            #tkarang.blogspot.com
+                        </p>
+                    </div>
+                </div>
+                <div class="fauna-card">
+                    <img src="/public/images/terumbu karang Pectinia paeonia.jpg" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Pectinia paeonia</h3>
+                        <p>*Pectinia paeonia*: Karang dengan bentuk yang mirip daun dan tepi bergelombang, memiliki tekstur yang halus.
+                            #tkarang.blogspot.com
+                        </p>
+                    </div>
+                </div>
+                <div class="fauna-card">
+                    <img src="/public/images/terumbu karang Montipora hispida.jpg" alt="Mangrove">
+                    <div class="card-content">
+                        <h3>Montipora hispida</h3>
+                        <p>*Montipora hispida*: Karang dengan permukaan berbintik kasar, biasanya tumbuh di perairan yang jernih dan tenang.
+                            #tkarang.blogspot.com
+                        </p>
+                    </div>
+               <div class="slider-dots"></div>
+           </div>
+       </main>
+       
+       <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.slider-container');
+            const slider = document.querySelector('.fauna-grid');
+            const cards = document.querySelectorAll('.fauna-card');
+            const prevButton = document.querySelector('.prev-button');
+            const nextButton = document.querySelector('.next-button');
+            const dotsContainer = document.querySelector('.slider-dots');
+            
+            let currentIndex = 0;
+            const cardWidth = 320; // card width + gap
+            const visibleCards = Math.floor(container.offsetWidth / cardWidth);
+            
+            // Create dots
+            cards.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+            
+            // Update dots
+            function updateDots() {
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+            
+            // Navigation functions
+            function goToSlide(index) {
+                currentIndex = index;
+                const offset = -currentIndex * cardWidth;
+                slider.style.transform = `translateX(${offset}px)`;
+                updateDots();
+            
+                // Slide to the end of the images
+                if (index === cards.length - 1) {
+                    setTimeout(() => {
+                        goToSlide(0);
+                    }, 3000);
+                }
+            }
+            
+            function nextSlide() {
+                if (currentIndex < cards.length - 1) {
+                    goToSlide(currentIndex + 1);
+                } else {
+                    goToSlide(0);
+                }
+            }
+            
+            function prevSlide() {
+                if (currentIndex > 0) {
+                    goToSlide(currentIndex - 1);
+                } else {
+                    goToSlide(cards.length - 1);
+                }
+            }
+            
+            // Event listeners
+            nextButton.addEventListener('click', nextSlide);
+            prevButton.addEventListener('click', prevSlide);
+            
+            // Touch/swipe support
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            slider.addEventListener('touchstart', e => {
+                touchStartX = e.touches[0].clientX;
+            });
+            
+            slider.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].clientX;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > 50) { // minimum swipe distance
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+            });
+            
+            // Card expand/collapse
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    cards.forEach(c => {
+                        if (c !== card) c.classList.remove('active');
+                    });
+                    card.classList.toggle('active');
+                });
+            });
+            
+            // Auto slide after 3 seconds
+            setInterval(() => {
+                nextSlide();
+            }, 3000);
+        });
+        </script>
+       </head>
+       <body>
+           <div class="map-container">
+               <h1 class="map-title">Wilayah Konservasi Taman Nasional Ujung Kulon</h1>
+               <div id="map"></div>
+           </div>
+       
+           <script>
+               document.addEventListener('DOMContentLoaded', () => {
+                   const map = L.map('map').setView([-6.7777, 105.3721], 10);
+                   
+                   const layers = {
+                       topo: L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                           attribution: '© OpenStreetMap contributors, © OpenTopoMap'
+                       }),
+                       satellite: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                           attribution: '© Esri'
+                       }),
+                       street: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                           attribution: '© OpenStreetMap contributors'
+                       })
+                   };
+                   
+                   layers.topo.addTo(map);
+                   const controlDiv = document.createElement('div');
+                   controlDiv.className = 'map-controls';
+                   controlDiv.innerHTML = `
+                       <button class="map-type-btn active" data-type="topo">Topografi</button>
+                       <button class="map-type-btn" data-type="satellite">Satelit</button>
+                       <button class="map-type-btn" data-type="street">Jalan</button>
+                   `;
+                   map.getContainer().appendChild(controlDiv);
+                   
+                   const locations = [
+                       {
+                           name: 'Taman Nasional Ujung Kulon',
+                           lat: -6.7777,
+                           lng: 105.3721,
+                           desc: 'Taman nasional dengan kekayaan biodiversitas tinggi, Kawasan ini mencakup ekosistem pesisir yang kaya, hutan mangrove, terumbu karang, dan berbagai spesies flora fauna langka.',
+                           moreInfo: 'https://id.wikipedia.org/wiki/Taman_Nasional_Ujung_Kulon'
+                       }
+                   ];
+                   
+                   locations.forEach(loc => {
+                       const marker = L.marker([loc.lat, loc.lng]).addTo(map);
+                       
+                       const popupContent = `
+                           <div class="popup-content">
+                               <div class="popup-info">
+                                   <h3>${loc.name}</h3>
+                                   <p>${loc.desc}</p>
+                               </div>
+                               <div class="popup-links">
+                                   <a href="https://www.google.com/maps/dir/?api=1&destination=${loc.lat},${loc.lng}" 
+                                      class="popup-button directions-btn" 
+                                      target="_blank">
+                                       Petunjuk Arah
+                                   </a>
+                                   <a href="${loc.moreInfo}" 
+                                      class="popup-button more-info-btn"
+                                      target="_blank">
+                                       Info Lebih Lanjut
+                                   </a>
+                               </div>
+                           </div>
+                       `;
+                       
+                       marker.bindPopup(popupContent, {
+                           maxWidth: 400,
+                           className: 'custom-popup'
+                       });
+                   });
+                   
+                   const mapButtons = controlDiv.querySelectorAll('.map-type-btn');
+                   mapButtons.forEach(button => {
+                       button.addEventListener('click', (e) => {
+                           const type = e.target.dataset.type;
+                           
+                           mapButtons.forEach(btn => btn.classList.remove('active'));
+                           e.target.classList.add('active');
+                           
+                           Object.values(layers).forEach(layer => map.removeLayer(layer));
+                           layers[type].addTo(map);
+                       });
+                   });
+               });
+           </script>
+       </body>
+       </html>
+
+<footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tentang Pesisir Ujung Kulon</h3>
+                <p>Ekosistem pesisir Ujung Kulon merupakan habitat alami berbagai flora dan fauna langka yang dilindungi. Kawasan ini memiliki peran penting dalam menjaga keseimbangan ekosistem dan keanekaragaman hayati Indonesia.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Hubungi Kami</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Ciracas No.38, Serang, Kec. Serang, Kota Serang, Banten 42116</p>
+                    <p><i class="fas fa-phone"></i> (021) 1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> info@ekosistempesisir.id</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Menu Cepat</h3>
+                <ul class="quick-links">
+                    <li><a href="/flora">Flora</a></li>
+                    <li><a href="/fauna">Fauna</a></li>
+                    <li><a href="/karang">Klasifikasi temporal</a></li>
+                    <li><a href="/sejarah">Sejarah</a></li>
+                    <li><a href="#volunteer">Program Volunteer</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Umpan Balik</h3>
+                <form class="feedback-form" id="feedbackForm">
+                    <input type="email" placeholder="Email Anda" required>
+                    <textarea placeholder="Pesan Anda" required></textarea>
+                    <button type="submit">Kirim</button>
+                    <div class="success-message">Terima kasih! Pesan Anda telah terkirim.</div>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Ekosistem Pesisir Ujung Kulon. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form elements
+            const email = this.querySelector('input[type="email"]');
+            const message = this.querySelector('textarea');
+            const successMessage = this.querySelector('.success-message');
+            
+            // Simple validation
+            if (email.value && message.value) {
+                // Here you would typically send the data to a server
+                console.log('Feedback submitted:', {
+                    email: email.value,
+                    message: message.value
+                });
+                
+                // Show success message
+                successMessage.style.display = 'block';
+                
+                // Reset form
+                this.reset();
+                
+                // Hide success message after 3 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>     

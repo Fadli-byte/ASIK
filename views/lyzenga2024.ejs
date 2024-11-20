@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taman Nasional Ujung Kulon - Ecosystem View</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="/data24.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            background: linear-gradient(135deg, #1a4567 0%, #0a2233 100%);
+        }
+
+        header {
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(-45deg, #1a4567, #2980b9, #16a085, #1a4567);
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            animation: floatingElement 3s infinite ease-in-out;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
+            transition: transform 0.4s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-left: 10px;
+            background: linear-gradient(45deg, #fff, #a8e6ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        .menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .menu-item {
+            position: relative;
+        }
+
+        .menu-item a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item a i {
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover a i {
+            transform: translateY(-2px);
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(26, 75, 110, 0.95);
+            border-radius: 15px;
+            padding: 10px;
+            min-width: 200px;
+            backdrop-filter: blur(10px);
+            animation: dropdownAnim 0.3s ease-out;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .menu-item:hover .dropdown {
+            display: block;
+        }
+
+        .year-control {
+            position: absolute;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 5px;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .year-btn {
+            padding: 10px 20px;
+            border: none;
+            background: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: bold;
+            color: #1a4567;
+            text-decoration: none;
+        }
+
+        .year-btn:hover {
+            background: rgba(26, 69, 103, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .year-btn.active {
+            background: #1a4567;
+            color: white;
+            box-shadow: 0 4px 15px rgba(26, 69, 103, 0.3);
+        }
+
+        #map {
+            width: 100%;
+            height: calc(100vh - 70px);
+            margin-top: 70px;
+            z-index: 1;
+        }
+
+        .year-info {
+            position: absolute;
+            top: 160px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            max-width: 300px;
+            animation: slideLeft 0.5s ease-out;
+        }
+
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 69, 103, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-top: 5px solid #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes floatingElement {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes dropdownAnim {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px) translateX(-50%); opacity: 0; }
+            to { transform: translateY(0) translateX(-50%); opacity: 1; }
+        }
+
+        @keyframes slideLeft {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <img src="/public/images/bg_fik.png" alt="Logo Ekosistem Pesisir" class="logo" style="margin-left: -150px; margin-top: 5px;">
+<h1 style="display: inline-block; margin-left: 1px;">KonservasiUjungKulon</h1>
+            </a>
+            <nav>
+                <ul class="menu" style="margin-left: auto;">
+                    <li class="menu-item"><a href="/utama"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li class="menu-item">
+                        <a href="#"><i class="fas fa-graduation-cap"></i> Edukasi</a>
+                        <ul class="dropdown">
+                            <li><a href="/flora"><i class="fas fa-seedling"></i> Flora</a></li>
+                            <li><a href="/fauna"><i class="fas fa-fish"></i> Fauna</a></li>
+                            <li><a href="/sejarah"><i class="fas fa-water"></i> Sejarah</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#"><i class="fas fa-shield-alt"></i> Konservasi</a>
+                        <ul class="dropdown">
+                            <li><a href="/karang"><i class="fas fa-water"></i> Karang&Lamun</a></li>
+                            <li><a href="/lamun"><i class="fas fa-leaf"></i> Mangrove </a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="/login"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id='map'></div>
+    
+    <div class="year-control">
+        <a href="javascript:void(0)" class="year-link year-btn active" data-year="2019" onclick="window.location.href = '/lamun'">2019</a>
+        <a href="javascript:void(0)" class="year-link year-btn active" data-year="2020" onclick="window.location.href = '/lyzenga2020'">2020</a>
+        <a href="javascript:void(0)" class="year-link year-btn active" data-year="2021" onclick="window.location.href = '/lyzenga2021'">2021</a>
+        <a href="javascript:void(0)" class="year-link year-btn active" data-year="2022" onclick="window.location.href = '/lyzenga2022'">2022</a>
+        <a href="javascript:void(0)" class="year-link year-btn active" data-year="2023" onclick="window.location.href = '/lyzenga2023'">2023</a>
+        <a href="javascript:void(0)" class="year-link year-btn active" data-year="2024" onclick="window.location.href = '/lyzenga2024'">2024</a>
+    </div>
+
+    <div class="year-info">
+        <h3>Data Tahun <span id="currentYear">2024</span></h3>
+        <p>Status: <span id="yearStatus">Data Aktif</span></p>
+        <p>Total Area: <span id="yearArea">0</span> ha</p>
+    </div>
+
+    <div class="legend">
+        <h3>Klasifikasi Mangrove</h3>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #98f3fa"></div>
+            <span>Perairan</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #e16907"></div>
+            <span>Kondisi Mangrove Buruk</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ffc414; border: 1px solid #ccc"></div>
+            <span>Kondisi Mangrove Normal</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #026402"></div>
+            <span>Daratan</span>
+        </div>
+    </div>
+
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        const map = L.map('map', {
+            center: [-6.7777, 105.3721],
+            zoom: 11.4
+        });
+
+        const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap'
+        }).addTo(map);
+
+        const osmHOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap contributors'
+        });
+
+        const openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenTopoMap'
+        });
+
+        const baseLayers = {
+            'OpenStreetMap': osm,
+            'OpenStreetMap.HOT': osmHOT,
+            'OpenTopoMap': openTopoMap
+        };
+
+        let currentGeoJsonLayer = null;
+        let currentYear = '2024';
+
+        function showLoading() {
+            document.querySelector('.loading-overlay').classList.add('active');
+        }
+
+        function hideLoading() {
+            document.querySelector('.loading-overlay').classList.remove('active');
+        }
+
+        function loadYearData(year) {
+            showLoading();
+            
+            setTimeout(() => {
+                if (currentGeoJsonLayer) {
+                    map.removeLayer(currentGeoJsonLayer);
+                }
+
+                if (typeof mangrove24 !== 'undefined' &&  mangrove24.features &&  mangrove24.features.length > 0) {
+                    const yearData = JSON.parse(JSON.stringify( mangrove23));
+                    
+                    yearData.features.forEach(feature => {
+                        const yearDiff = parseInt(year) - 2023;
+                        yearData.features.forEach(feature => {
+                        const yearDiff = parseInt(year) - 2023;
+                        const originalLuas = feature.properties.luas || 0;
+                        
+                        switch (feature.properties.gridcode) {
+                            case 1:
+                                feature.properties.luas = Math.round(originalLuas * (1 + yearDiff * 0.05));
+                                break;
+                            case 2:
+                                feature.properties.luas = 328.180542;
+                                break;
+                            case 3:
+                                feature.properties.luas = 934.418997;
+                                break;
+                            case 4:
+                                feature.properties.luas = 26294.620686;
+                            default:
+                                break;
+                        }
+                    });
+                    });
+                    currentGeoJsonLayer = L.geoJSON(yearData, {
+                        style: function(feature) {
+                            const gridcode = feature.properties.gridcode;
+                            let fillColor, color;
+
+                            if (gridcode <= 1) {
+                                fillColor = '#D2691E'; // Zooxanthellae - coklat keemasan
+                                color = '#D2691E';
+                            } else if (gridcode <= 2) {
+                                fillColor = '#e16907'; // Karang sehat - ungu
+                                color = '#e16907';
+                            } else if (gridcode <= 3) {
+                                fillColor = '#ffc414'; // Karang stress - ungu
+                                color = '#ffc414';
+                            } else if (gridcode <= 4) {
+                                fillColor = '#026402'; // Alga simbion - hijau
+                                color = '#026402';
+                            } else if (gridcode <= 5) {
+                                fillColor = '#FFFF00'; // Pasir - kuning
+                                color = '#FFFF00';
+                            } else {
+                                fillColor = '#000000';
+                                color = '#000000';
+                            }
+                            
+                            return {
+                                color: color,
+                                weight: 2,
+                                fillColor: fillColor,
+                                fillOpacity: 0.6
+                            };
+                        },
+
+                       onEachFeature: function(feature, layer) {
+    const jenisEkosistem = {
+        1: 'Perairan',
+        2: 'Kesehatan Mangrove Buruk',
+        3: 'Kesehatan mangrove Normal',
+        4: 'Daratan'
+        
+    };
+
+    const ekosistemName = jenisEkosistem[feature.properties.gridcode] || 'Tidak Diketahui';
+
+    const popupContent = `
+        <div class="custom-popup">
+            <h3 class="popup-header">${ekosistemName}</h3>
+            <div class="popup-content">
+                <p><strong>Lokasi:</strong> Taman Nasional Ujung Kulon</p>
+                <p><strong>Luas Area:</strong> ${(feature.properties.luas || 'N/A')} ha</p>
+                <p><strong>Gridcode:</strong> ${feature.properties.gridcode || 'N/A'}</p>
+                <p><strong>Ekosistem:</strong> Pesisir & Laut</p>
+                <p><strong>Status:</strong> Dilindungi</p>
+                <p><strong>Tahun Data:</strong> ${currentYear}</p>
+                <p><strong>Jenis Ekosistem:</strong> ${ekosistemName}</p>
+            </div>
+        </div>
+    `;
+
+    layer.bindPopup(popupContent);
+}
+
+                    }).addTo(map);
+
+                    // Update year info
+                    document.getElementById('currentYear').textContent = year;
+                    document.getElementById('yearStatus').textContent = 'Data Aktif';
+                    const totalArea = yearData.features.reduce((sum, feature) => 
+                        sum + (feature.properties.luas || 0), 0);
+                    document.getElementById('yearArea').textContent = totalArea.toLocaleString();
+                }
+                hideLoading();
+            }, 500);
+        }
+
+        document.querySelectorAll('.year-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const year = this.dataset.year;
+                currentYear = year;
+                loadYearData(year);
+            });
+        });
+
+        loadYearData('2023');
+        
+        const layerControl = L.control.layers(baseLayers).addTo(map);
+    </script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekosistem Pesisir Indonesia</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/utama.css">
+</head>
+<body>
+    <header id="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <img src="/public/images/bg_fik.png" alt="Logo Ekosistem Pesisir" class="logo" style="margin-left: -150px; ;">
+<h1 style="display: inline-block; margin-left: 1px;">KonservasiUjungKulon</h1>
+            </a>
+            <nav>
+                <ul class="menu" style="margin-left: auto;">
+                    <li class="menu-item"><a href="/utama"><i class="fas fa-home"></i> Beranda</a></li>
+                    <li class="menu-item">
+                        <a href="#"><i class="fas fa-graduation-cap"></i> Edukasi</a>
+                        <ul class="dropdown">
+                            <li><a href="/flora"><i class="fas fa-seedling"></i> Flora</a></li>
+                            <li><a href="/fauna"><i class="fas fa-fish"></i> Fauna</a></li>
+                            <li><a href="/sejarah"><i class="fas fa-water"></i> Sejarah</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#"><i class="fas fa-shield-alt"></i> Konservasi</a>
+                        <ul class="dropdown">
+                            <li><a href="/karang"><i class="fas fa-water"></i> Karang&Lamun</a></li>
+                            <li><a href="/lamun"><i class="fas fa-leaf"></i> Mangrove </a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a href="/login" onclick="return confirm('Apakah Anda yakin ingin logout?')"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+   <script>
+     window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'transparent';
+            } else {
+                header.style.background = 'linear-gradient(-45deg, #1a4b6e, #2980b9, #16a085, #2980b9)';
+            }
+        });
+   </script>
+</body>
+</html>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Jelajahi Keindahan Ekosistem Pesisir Taman Nasional Ujung Kulon</h1>
+                <p>Memahami, Melestarikan, dan Melindungi Kekayaan Alam Pesisir</p>
+            </div>
+        </section>
+        <section class="about-us" id="about">
+            <div class="about-content">
+                <div class="about-text" style="text-align: left; margin-left: 0;">
+                <h2 class="fade-in">Tentang Kami</h2>
+                <p class="fade-in">
+                    KonservasiUjungKulon adalah platform informasi yang berfokus pada pemantauan ekosistem pesisir Taman Nasional Ujung Kulon, mencakup lamun, mangrove, dan terumbu karang. Kami menyediakan data perubahan ekosistem dari tahun 2019 hingga 2024, membantu masyarakat dan peneliti memahami dinamika lingkungan pesisir. Dengan , kami berkomitmen mendukung pelestarian ekosistem yang vital bagi keanekaragaman hayati dan keberlanjutan masa depan.</p>
+                <p class="fade-in">Melalui program-program kami, kami bertujuan untuk meningkatkan kesadaran masyarakat tentang pentingnya ekosistem pesisir dan mengajak semua pihak untuk berpartisipasi dalam upaya konservasi.</p>
+            </div>
+                <div style="display: flex; justify-content: flex-end;">
+                    <img src="/public/images/mangrove sonneratia.jpg" alt="Tentang Kami" class="about-us-image" style="width: 500px; height: 300px; object-fit: cover; border-radius: 25px; background: none;">
+                </div>
+                </div>
+            </div>
+            <style>
+                .fade-in {
+                    opacity: 0;
+                    transition: opacity 2s ease-in-out;
+                }
+
+                .about-us-image {
+                    transform: scale(1);
+                    transition: transform 1.2s ease-in-out;
+                }
+            </style>
+            <script>
+                document.addEventListener('scroll', function() {
+                    const aboutSection = document.getElementById('about');
+                    const fadeInElements = aboutSection.querySelectorAll('.fade-in');
+                    const image = aboutSection.querySelector('.about-us-image');
+                    const sectionTop = aboutSection.getBoundingClientRect().top;
+                    const triggerPoint = window.innerHeight / 1.5;
+
+                    if (sectionTop < triggerPoint) {
+                        fadeInElements.forEach(element => {
+                            element.style.opacity = 1;
+                        });
+                        image.style.transform = 'scale(1.2)';
+                    } else {
+                        fadeInElements.forEach(element => {
+                            element.style.opacity = 0;
+                        });
+                        image.style.transform = 'scale(1)';
+                    }
+                });
+            </script>
+       </head>
+       <body>
+           <section class="title-section">
+               <div class="ocean-decoration">
+                   <div class="wave"></div>
+                   <div class="wave"></div>
+                   <div class="wave"></div>
+               </div>
+               <div class="floating-elements">
+                   <div class="bubble"></div>
+                   <div class="bubble"></div>
+                   <div class="bubble"></div>
+                   <div class="bubble"></div>
+                   <div class="bubble"></div>
+               </div>
+               <div class="animated-title">
+                   <h1 class="main-title">Ekosistem Pesisir<br>Taman Nasional Ujung Kulon</h1>
+                   <p class="subtitle">Menjelajahi Keindahan dan Keanekaragaman Hayati Pesisir Taman Nasional Ujung Kulon</p>
+               </div>
+           </section>
+       
+           <section class="ecosystem-grid">
+               <div class="ecosystem-card">
+                   <img src="/public/images/mangrove.png" alt="Hutan Mangrove">
+                   <div class="card-content">
+                       <h3>Hutan Mangrove</h3>
+                       <p>Hutan Mangrove: Ekosistem pesisir yang kaya, melindungi pantai dari erosi, habitat bagi ikan, menyerap karbon.</p>
+                   </div>
+               </div>
+               <div class="ecosystem-card">
+                   <img src="/public/images/lamun.png" alt="Terumbu Karang">
+                   <div class="card-content">
+                       <h3>Padang Lamun</h3>
+                       <p>Lamun: Padang bawah laut, penting bagi ekosistem laut, menyerap karbon, penunjang kehidupan biota laut.</p>
+                   </div>
+               </div>
+               <div class="ecosystem-card">
+                   <img src="/public/images/pexels-didsss-2508550.jpg" alt="Padang Lamun">
+                   <div class="card-content">
+                       <h3>Terumbu Karang</h3>
+                       <p>Terumbu Karang: Struktur bawah laut yang indah, pelindung pantai alami, rumah bagi keanekaragaman hayati laut.</p>
+                   </div>
+               </div>
+           </section>
+       </body>
+       </html>
+    </main>
+</head>
+<body>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tentang Pesisir Ujung Kulon</h3>
+                <p>Ekosistem pesisir Ujung Kulon merupakan habitat alami berbagai flora dan fauna langka yang dilindungi. Kawasan ini memiliki peran penting dalam menjaga keseimbangan ekosistem dan keanekaragaman hayati Indonesia.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Hubungi Kami</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i>Jl. Ciracas No.38, Serang, Kec. Serang, Kota Serang, Banten 42116</p>
+                    <p><i class="fas fa-phone"></i> 0857-9465-5442</p>
+                    <p><i class="fas fa-envelope"></i> info@ekosistempesisir.id</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Menu Cepat</h3>
+                <ul class="quick-links">
+                    <li><a href="/flora">Flora</a></li>
+                    <li><a href="/fauna"> Fauna</a></li>
+                    <li><a href="karang">Penelitian</a></li>
+                    <li><a href="/sejarah">Sejarah</a></li>
+                    <li><a href="/habitat/index">Input Data</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Umpan Balik</h3>
+                <form class="feedback-form" id="feedbackForm">
+                    <input type="email" placeholder="Email Anda" required>
+                    <textarea placeholder="Pesan Anda" required></textarea>
+                    <button type="submit">Kirim</button>
+                    <div class="success-message">Terima kasih! Pesan Anda telah terkirim.</div>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Ekosistem Pesisir Ujung Kulon. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Ambil elemen form
+    const email = this.querySelector('input[type="email"]');
+    const message = this.querySelector('textarea');
+    const successMessage = this.querySelector('.success-message');
+    
+    // Validasi sederhana
+    if (email.value && message.value) {
+        // Logika untuk mengirim data (jika ada server)
+        console.log('Feedback submitted:', {
+            email: email.value,
+            message: message.value
+        });
+        
+        // Link mailto yang diarahkan ke Gmail
+        const link = `https://mail.google.com/mail/?view=cm&fs=1&to=fadli04@upi.edu&cc=${encodeURIComponent(email.value)}&su=Feedback dari website Ekosistem Pesisir Ujung Kulon&body=${encodeURIComponent(message.value)}`;
+        
+        // Buka link di tab baru
+        window.open(link, '_blank');
+        
+        // Tampilkan pesan sukses
+        successMessage.style.display = 'block';
+        
+        // Reset form
+        this.reset();
+        
+        // Sembunyikan pesan sukses setelah 3 detik
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 3000);
+    }
+});
+    </script>
+</body>
+</html>
